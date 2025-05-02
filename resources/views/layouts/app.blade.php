@@ -40,14 +40,6 @@
 
             <!-- Top Navigation -->
             @include('layouts.navigation')
-
-            <!-- Auth bar -->
-            @auth
-                <div class="p-2 text-end me-4">
-                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                        @csrf
-            @endauth
-
             <br>
             <br>
 
