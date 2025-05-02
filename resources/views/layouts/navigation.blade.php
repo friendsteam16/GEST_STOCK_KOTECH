@@ -34,6 +34,11 @@
                                 🚪 Se déconnecter
                             </button>
                         </form>
+
+                        <a href="{{ route('admin.roles.index') }}" class="btn btn-primary">
+                            Gérer les rôles des utilisateurs
+                        </a>
+
                     </div>
                 </div>
             @endauth

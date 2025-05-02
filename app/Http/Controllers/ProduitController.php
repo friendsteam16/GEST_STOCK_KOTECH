@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class ProduitController extends Controller
 
     public function create()
     {
-        return view('produits.create');
+        $categories = Categorie::all(); // Récupère toutes les catégories
+        return view('produits.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -55,6 +57,7 @@ class ProduitController extends Controller
         $produit->update($request->all());
 
         return redirect()->route('produits.index')->with('success', 'Produit mis à jour avec succès');
+        return view('produits.index', compact('produits', 'seuil_alerte'));
     }
 
     public function destroy(Produit $produit)

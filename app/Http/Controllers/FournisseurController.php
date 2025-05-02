@@ -23,16 +23,17 @@ class FournisseurController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-        try {
-            // Logique de création du fournisseur
-            dd($request->all());
-            Fournisseur::create($request->validated());
-            return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur créé avec succès.');
-        } catch (\Exception $e) {
-            Log::error('Erreur lors de la création du fournisseur : ' . $e->getMessage());
-            return back()->withErrors(['error' => 'Une erreur est survenue.']);
-        }
+        $request->validate([
+            'nom' => 'required|string',
+            'contact' => 'nullable|string',
+            'email' => 'nullable|email',
+            'adresse' => 'nullable|string',
+            'note' => 'nullable|string',
+        ]);
+    
+        Fournisseur::create($request->only('nom', 'contact', 'email', 'adresse', 'note'));
+    
+        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur ajouté avec succès.');
     }
 
     public function edit(Fournisseur $fournisseur)
@@ -42,14 +43,18 @@ class FournisseurController extends Controller
 
     public function update(Request $request, Fournisseur $fournisseur)
     {
-        $request->validate([
-            'nom' => 'required|string|max:255',
+        $validated = $request->validate([
+            'nom'     => 'required|string|max:255',
+            'contact' => 'nullable|string|max:255',
+            'email'   => 'nullable|email|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'note'    => 'nullable|string',
         ]);
-
-        $fournisseur->update($request->all());
+    
+        $fournisseur->update($validated);
+    
         return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur mis à jour.');
     }
-
     public function destroy(Fournisseur $fournisseur)
     {
         $fournisseur->delete();

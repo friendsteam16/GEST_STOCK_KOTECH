@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2 class="mb-3">Fournisseur bien enregistré !</h2>
-
+    <br>
     <p><strong>Nom :</strong> {{ $fournisseur['nom'] }}</p>
     <p><strong>Contact :</strong> {{ $fournisseur['contact'] }}</p>
     <p><strong>Email :</strong> {{ $fournisseur['email'] }}</p>

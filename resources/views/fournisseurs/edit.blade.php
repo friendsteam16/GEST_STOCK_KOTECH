@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>✏️ Modifier le fournisseur</h2>
-
+    <br>
     <form method="POST" action="{{ route('fournisseurs.update', $fournisseur->id) }}">
         @csrf
         @method('PUT')

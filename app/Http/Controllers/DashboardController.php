@@ -73,7 +73,7 @@ class DashboardController extends Controller
 
         $stockBas = Produit::where('quantite_stock', '<', 10)->get();
 
-        return view('dashboard.index', compact(
+        return view('dashboard', compact(
             'totalProduits',
             'stockTotal',
             'totalEntrees',
@@ -85,7 +85,8 @@ class DashboardController extends Controller
             'stockBas',
             'annee' // <--- Ne PAS mettre de virgule ici
         ));
-        
+
+   
     }
 
     public function exportPdf(Request $request)

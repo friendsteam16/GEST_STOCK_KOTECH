@@ -28,9 +28,15 @@
         </div>
 
         <div class="mb-3">
-            <label for="categorie" class="form-label">Catégorie</label>
-            <input type="text" name="categorie" class="form-control">
+            <label for="categorie_id" class="form-label">Catégorie</label>
+            <select name="categorie_id" class="form-select" required>
+                <option value="">-- Sélectionner --</option>
+                @foreach($categories as $categorie)
+                    <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
+                @endforeach
+            </select>
         </div>
+
 
         <div class="mb-3">
             <label for="quantite_stock" class="form-label">Quantité initiale</label>

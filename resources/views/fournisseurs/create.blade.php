@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <h2>Ajouter un fournisseur</h2>
-
-    <form method="POST" action="fournisseurs">
+    <br>
+    <form method="POST" action="{{ route('fournisseurs.store') }}">
         @csrf
 
         <div class="mb-3">
@@ -33,7 +33,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Enregistrer</button>
-        <a href="fournisseurs" class="btn btn-secondary">Annuler</a>
+        <a href="{{ route('fournisseurs.index') }}" class="btn btn-secondary">Annuler</a>
     </form>
 </div>
 @endsection

@@ -21,7 +21,7 @@
                 'role_id' => 'required|exists:roles,id',
             ]);
     
-            $user->role_id = $request->role_id;
+            $user->roles()->sync($request->input("roles.$user->id", []));
             $user->save();
     
             return redirect()->route('admin.users.index')->with('success', 'Rôle mis à jour avec succès');

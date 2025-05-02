@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>📇 Fournisseurs</h2>
-
+    <br>
     <a href="{{ route('fournisseurs.create') }}" class="btn btn-success mb-3">➕ Ajouter un fournisseur</a>
 
     @if(session('success'))

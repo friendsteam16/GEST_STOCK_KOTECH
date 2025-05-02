@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('sorties.store') }}" method="POST">
+    <form action="{{ route('sorties.invoice.store', $sortie->id) }}" method="POST">
         @csrf
 
         <!-- Produit -->

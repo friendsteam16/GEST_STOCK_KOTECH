@@ -39,16 +39,25 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        @if ($isFirstUser)
-            <div class="mt-4">
-                <x-input-label for="role_id" :value="__('Rôle')" />
-                <select name="role_id" id="role_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
-                    @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
-                    @endforeach
-                </select>
-                <x-input-error :messages="$errors->get('role_id')" class="mt-2" />
-            </div>
+        @if($isFirstUser)
+        <div class="mt-4">
+            <label for="role_id" class="block text-sm font-medium text-gray-700">Rôle</label>
+            <select name="role_id"
+                    id="role_id"
+                    required
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <option value="">-- Sélectionnez un rôle --</option>
+            @foreach($roles as $role)
+                <option value="{{ $role->id }}"
+                        {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                {{ ucfirst($role->name) }}
+                </option>
+            @endforeach
+            </select>
+            @error('role_id')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
         @endif
         
         

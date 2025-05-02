@@ -19,4 +19,9 @@ class Produit extends Model
         'seuil_alerte',
         'description',
     ];
+
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 }

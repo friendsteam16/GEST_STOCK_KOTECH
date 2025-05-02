@@ -6,6 +6,7 @@
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
+    use App\Models\Role;
 
     class User extends Authenticatable
     {
@@ -30,9 +31,9 @@
             return $this->belongsTo(Role::class);
         }
 
-        public function hasRole($role)
+        public function hasRole($roleName)
         {
-            return $this->role && $this->role->name === $role;
+            return $this->role && $this->role->name === $roleName;
         }
 
         public function hasAnyRole(array $roles)
@@ -40,6 +41,17 @@
             return $this->role && in_array($this->role->name, $roles);
         }
         
+        // Pour simplifier l’accès
+        public function isAdmin()
+        {
+            return $this->hasRole('admin');
+        }
+
+        public function hasPermission($permissionName)
+        {
+            return $this->roles->flatMap->permissions->pluck('name')->contains($permissionName);
+        }
+
         
 
         /**

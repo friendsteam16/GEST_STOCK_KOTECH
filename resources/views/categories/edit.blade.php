@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>✏️ Modifier la catégorie</h2>
-
+    <br>
     @if($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">

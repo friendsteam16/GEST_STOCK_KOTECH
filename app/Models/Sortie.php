@@ -20,4 +20,10 @@ class Sortie extends Model
     {
         return $this->belongsTo(Produit::class);
     }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
+    }
+
 }

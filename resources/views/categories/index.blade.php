@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>📂 Catégories de produits</h2>
-
+    <br>
     <a href="{{ route('categories.create') }}" class="btn btn-success mb-3">➕ Nouvelle catégorie</a>
 
     @if(session('success'))

@@ -24,6 +24,7 @@ class RegisteredUserController extends Controller
         $isFirstUser = User::count() === 0;
         $roles = Role::all();
 
+
         return view('auth.register', [
             'isFirstUser' => $isFirstUser,
             'roles' => $roles,
@@ -35,30 +36,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
         $isFirstUser = User::count() === 0;
 
+        $rules = [
+            'name'     => ['required','string','max:255'],
+            'email'    => ['required','string','email','max:255','unique:users'],
+            'password' => ['required','confirmed', Rules\Password::defaults()],
+        ];
+    
+        // Si c'est le premier user, on exige un role_id valide
+        if ($isFirstUser) {
+            $rules['role_id'] = ['required','exists:roles,id'];
+        }
+    
+        $data = $request->validate($rules);
+    
         // Récupération du rôle
         $roleId = $isFirstUser
-            ? $request->input('role_id')
-            : Role::where('name', 'utilisateur')->first()->id;
-
+            ? $data['role_id']
+            : Role::where('name','utilisateur')->first()->id;
+    
+        // Création de l'utilisateur
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $roleId,
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role_id'  => $roleId,
         ]);
-
+    
         event(new Registered($user));
         Auth::login($user);
-
+    
         return redirect(RouteServiceProvider::HOME);
-
     }
 }

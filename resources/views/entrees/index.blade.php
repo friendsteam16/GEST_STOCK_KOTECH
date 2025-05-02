@@ -18,14 +18,6 @@
         <a href="{{ route('entrees.create') }}" class="btn btn-primary">
             <i class="fas fa-plus-circle"></i> Ajouter une entrée
         </a>
-        <div class="btn-group">
-            <a href="{{ route('entrees.export.pdf', request()->only(['date_debut', 'date_fin'])) }}" class="btn btn-danger">
-                <i class="fas fa-file-pdf"></i> Exporter en PDF
-            </a>
-            <a href="{{ route('entrees.export.excel', request()->only(['date_debut', 'date_fin'])) }}" class="btn btn-success">
-                <i class="fas fa-file-excel"></i> Exporter en Excel
-            </a>
-        </div>
     </div>
 
     <!-- Formulaire de filtrage -->
@@ -50,6 +42,15 @@
                 </div>
             </form>
         </div>
+        
+    </div>
+    <div class="btn-group">
+        <a href="{{ route('entrees.export.pdf', request()->only(['date_debut', 'date_fin'])) }}" class="btn btn-danger">
+            <i class="fas fa-file-pdf"></i> Exporter en PDF
+        </a>
+        <a href="{{ route('entrees.export.excel', request()->only(['date_debut', 'date_fin'])) }}" class="btn btn-success">
+            <i class="fas fa-file-excel"></i> Exporter en Excel
+        </a>
     </div>
 
     <!-- Tableau -->
